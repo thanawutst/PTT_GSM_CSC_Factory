@@ -27,6 +27,8 @@ import {
 import { makeStyles } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import MUIDataTable from "mui-datatables";
+import { UploadFile } from "src/components/Commons/UploadFile/Fileuploader";
+import { Cancel, SaveAlt, Save, Add } from "@material-ui/icons";
 
 const arrSelect = [
   { value: "1", label: "selection 1" },
@@ -123,15 +125,28 @@ const TestComponentsForm = (props) => {
     sInput: yupFormSchemas.string("Input Form Item", {
       required: true,
     }),
-    sSelect: yupFormSchemas.string("Select Form Item", {
+    nInputNumber: yupFormSchemas.string("Input Form Item", {
+      required: true,
+    }),
+    sSelect: yupFormSchemas.integer("Select Form Item", {
+      required: true,
+    }),
+    sMultiSelect: yupFormSchemas.string("Multi Select", {
+      required: true,
+    }),
+    dDatePicker: yupFormSchemas.date("Date Picker", {
+      required: true,
+    }),
+    dTimePicker: yupFormSchemas.date("Time Picker", {
+      required: true,
+    }),
+    sTextArea: yupFormSchemas.string("Text Area", {
       required: true,
     }),
   });
 
   const [initialValues] = useState(() => {
-    return {
-      sProject: null,
-    };
+    return {};
   });
 
   const form = useForm({
@@ -145,6 +160,10 @@ const TestComponentsForm = (props) => {
     setArrSelectForm(arrSelect);
     setarrData(arrDataList);
   }, []);
+
+  const onValidate = () => {
+    console.log("validate => Complete");
+  };
 
   const columnsTable = [
     {
@@ -335,7 +354,7 @@ const TestComponentsForm = (props) => {
         </Grid>
         <Grid item lg={3} md={3} sm={3} xs={3}>
           <TimePickerFormItem
-            name="Time Picker"
+            name="dTimePicker"
             required={true}
             label={"Time Picker"}
           />
@@ -356,6 +375,35 @@ const TestComponentsForm = (props) => {
             label={"Text Area Form"}
             required={true}
           />
+        </Grid>
+
+        {/* UploadFile */}
+        <Grid item lg={12} md={12} sm={12} xs={12}>
+          {/* <UploadFile
+            name="KM"
+            defaultFileData={{}}
+            size={50}
+            folder={"KM"}
+            arrData={(e: any) => {
+              setFileData_(e);
+            }}
+            isClearFile={false}
+            ResultClearFile={() => setisClearFile(false)}
+          /> */}
+        </Grid>
+
+        <Grid item lg={12} md={12} sm={12} xs={12}>
+          <Button
+            variant="contained"
+            onClick={(e) => {
+              form.handleSubmit(onValidate)(e);
+            }}
+            color="primary"
+            size="large"
+            startIcon={<Save />}
+          >
+            {"Validate"}
+          </Button>
         </Grid>
 
         {/* Table */}
