@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using SoftthaiIntranet.Models;
+using PTT_GSM_CSC_Factory.Models;
 
-namespace SoftthaiIntranet.Models.SystemModels.AllClass
+namespace PTT_GSM_CSC_Factory.Models.SystemModels.AllClass
 {
     public class AllClass
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace SoftthaiIntranet.Models.SystemModels.AuthenModel
+namespace PTT_GSM_CSC_Factory.Models.SystemModels.AuthenModel
 {
 
     public class CAppMenu : CMenu

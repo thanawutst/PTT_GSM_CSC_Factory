@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SoftthaiIntranet.Models.SystemModels
+namespace PTT_GSM_CSC_Factory.Models.SystemModels
 {
     public class LoginProps
     {

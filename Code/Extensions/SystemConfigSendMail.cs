@@ -11,7 +11,7 @@ using System.Net.Mail;
 using System.Globalization;
 using Microsoft.Extensions.Hosting;
 
-namespace SoftthaiIntranet.Extensions
+namespace PTT_GSM_CSC_Factory.Extensions
 {
     public class SystemConfigSendMail
     {

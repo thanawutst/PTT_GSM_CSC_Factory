@@ -7,10 +7,10 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
-using SoftthaiIntranet.Models.SystemModels;
+using PTT_GSM_CSC_Factory.Models.SystemModels;
 using Microsoft.AspNetCore.Http;
 
-namespace SoftthaiIntranet.Interfaces
+namespace PTT_GSM_CSC_Factory.Interfaces
 {
     public interface IAuthentication
     {

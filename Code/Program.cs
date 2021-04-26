@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace SoftthaiIntranet
+namespace PTT_GSM_CSC_Factory
 {
     public class Program
     {

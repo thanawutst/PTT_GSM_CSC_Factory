@@ -319,7 +319,7 @@ const Layout_MP_Back = (Props: any) => {
               </div>
               <Link to="/b_home" id={"toHome"}></Link>
               <div className="title">
-                <div className="label-2">GSM Gas Quality</div>
+                <div className="label-2">GSM CSC Factory</div>
               </div>
             </div>
           </div>

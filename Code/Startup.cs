@@ -12,11 +12,11 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using SoftthaiIntranet.Interfaces;
+using PTT_GSM_CSC_Factory.Interfaces;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 
-namespace SoftthaiIntranet
+namespace PTT_GSM_CSC_Factory
 {
     public class Startup
     {

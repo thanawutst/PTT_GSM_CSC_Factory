@@ -12,7 +12,7 @@ using System.Globalization;
 using Microsoft.Extensions.Hosting;
 using System.Web;
 
-namespace SoftthaiIntranet.Extensions
+namespace PTT_GSM_CSC_Factory.Extensions
 {
     public partial class SystemConfig
     {

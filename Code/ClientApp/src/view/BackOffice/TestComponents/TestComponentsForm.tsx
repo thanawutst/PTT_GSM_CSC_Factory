@@ -18,7 +18,7 @@ import InputFormItem from "src/components/Commons/inputElements/FormItems/InputF
 import FroalaBasicMoreTools from "src/components/Commons/inputElements/FormItems/FroalaBasicMoreTools";
 import TimePickerFormItem from "src/components/Commons/inputElements/FormItems/TimePickerFormItem";
 import SwitchFormItem from "src/components/Commons/inputElements/FormItems/SwitchFormItem";
-import AutocompleteFormItem from "src/components/Commons/inputElements/FormItems/AutocompleteFormItem";
+import AutoCompleteDistName from "src/components/Commons/inputElements/AutoComplete/AutoCompleteDistName";
 import {
   ButtonAddHead,
   ButtonEditTB,
@@ -27,8 +27,11 @@ import {
 import { makeStyles } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import MUIDataTable from "mui-datatables";
-import { UploadFile } from "src/components/Commons/UploadFile/Fileuploader";
+// import { UploadFile } from "src/components/Commons/UploadFile/Fileuploader";
 import { Cancel, SaveAlt, Save, Add } from "@material-ui/icons";
+import Fileuploader, {
+  Extension,
+} from "src/components/Commons/UploadFile/Fileuploader";
 
 const arrSelect = [
   { value: "1", label: "selection 1" },
@@ -120,7 +123,8 @@ const TestComponentsForm = (props) => {
   const classes = lable();
   const [arrData, setarrData] = useState([] as any[]);
   const [arrSelectForm, setArrSelectForm] = useState([] as any);
-
+  const [arrMultiSelectForm, setArrMultiSelectForm] = useState([] as any);
+  const [fileList, setFileList] = useState([] as any);
   const schema = yup.object().shape({
     sInput: yupFormSchemas.string("Input Form Item", {
       required: true,
@@ -132,7 +136,7 @@ const TestComponentsForm = (props) => {
       required: true,
     }),
     sMultiSelect: yupFormSchemas.string("Multi Select", {
-      required: true,
+      required: false,
     }),
     dDatePicker: yupFormSchemas.date("Date Picker", {
       required: true,
@@ -143,10 +147,21 @@ const TestComponentsForm = (props) => {
     sTextArea: yupFormSchemas.string("Text Area", {
       required: true,
     }),
+    sAutoComplete: yupFormSchemas.string("Auto Complete", {
+      required: true,
+    }),
   });
 
   const [initialValues] = useState(() => {
-    return {};
+    return {
+      sInput: null,
+      nInputNumber: null, // Defualt Day
+      sSelect: null,
+      sMultiSelect: null,
+      dDatePicker: null,
+      dTimePicker: null,
+      sTextArea: null,
+    };
   });
 
   const form = useForm({
@@ -155,11 +170,25 @@ const TestComponentsForm = (props) => {
     defaultValues: initialValues as any,
   });
 
+  // FileUploader
+  const onUploadSuccess = (value) => {
+    setFileList(value);
+  };
+
+  const onRemoveComplete = (value) => {
+    setFileList([]);
+  };
+
   useEffect(() => {
     // GetProjectLst();
     setArrSelectForm(arrSelect);
+    setArrMultiSelectForm(arrSelect);
     setarrData(arrDataList);
   }, []);
+
+  // useEffect(() => {
+  //   setFileList(fileList);
+  // }, [fileList]);
 
   const onValidate = () => {
     console.log("validate => Complete");
@@ -169,9 +198,6 @@ const TestComponentsForm = (props) => {
     {
       name: "nYear",
       options: {
-        // setCellProps: () => {
-        //   return { style: { textAlign: "center" } };
-        // },
         customHeadLabelRender: () => <b>Year</b>,
         setCellHeaderProps: () => {
           return { style: { textAlign: "center" } };
@@ -182,9 +208,6 @@ const TestComponentsForm = (props) => {
       name: "sMonth",
       label: "Month",
       options: {
-        // setCellProps: () => {
-        //   return { style: { textAlign: "center" } };
-        // },
         setCellHeaderProps: () => {
           return { style: { textAlign: "center" } };
         },
@@ -194,9 +217,6 @@ const TestComponentsForm = (props) => {
       name: "nItem",
       label: "Item",
       options: {
-        // setCellProps: () => {
-        //   return { style: { textAlign: "center" } };
-        // },
         setCellHeaderProps: () => {
           return { style: { textAlign: "center" } };
         },
@@ -213,9 +233,6 @@ const TestComponentsForm = (props) => {
       name: "dRequestDate",
       label: "Request Date",
       options: {
-        // setCellProps: () => {
-        //   return { style: { textAlign: "center" } };
-        // },
         setCellHeaderProps: () => {
           return { style: { textAlign: "center" } };
         },
@@ -225,9 +242,6 @@ const TestComponentsForm = (props) => {
       name: "sStatus",
       label: "Status",
       options: {
-        // setCellProps: () => {
-        //   return { style: { textAlign: "center" } };
-        // },
         setCellHeaderProps: () => {
           return { style: { textAlign: "center", width: "170px" } };
         },
@@ -335,7 +349,7 @@ const TestComponentsForm = (props) => {
           <SelectFormItem
             name="sMultiSelect"
             label={"Multi Select Form"}
-            options={arrSelectForm}
+            options={arrMultiSelectForm}
             mode={"multiple"}
           />
         </Grid>
@@ -343,7 +357,7 @@ const TestComponentsForm = (props) => {
           <FroalaBasicMoreTools id="sTextEditor" labal={"Text Editor"} />
         </Grid> */}
         <Grid item lg={6} md={6} sm={6} xs={6}>
-          <AutocompleteFormItem name="sAutoComplete" label={"Auto Complete"} />
+          <AutoCompleteDistName name="sAutoComplete" label={"Auto Complete"} />
         </Grid>
         <Grid item lg={3} md={3} sm={3} xs={3}>
           <DatePickerFormItem
@@ -379,17 +393,15 @@ const TestComponentsForm = (props) => {
 
         {/* UploadFile */}
         <Grid item lg={12} md={12} sm={12} xs={12}>
-          {/* <UploadFile
-            name="KM"
-            defaultFileData={{}}
-            size={50}
-            folder={"KM"}
-            arrData={(e: any) => {
-              setFileData_(e);
-            }}
-            isClearFile={false}
-            ResultClearFile={() => setisClearFile(false)}
-          /> */}
+          <Fileuploader
+            limit="1"
+            fileList={fileList || []}
+            onComplete={onUploadSuccess}
+            onRemoveComplete={onRemoveComplete}
+            fileMaxSize="10"
+            extensions={Extension.Image}
+            readOnly={false}
+          />
         </Grid>
 
         <Grid item lg={12} md={12} sm={12} xs={12}>

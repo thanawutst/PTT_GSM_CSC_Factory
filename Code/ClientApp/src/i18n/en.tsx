@@ -31,7 +31,7 @@ const en = {
   },
 
   app: {
-    title: 'PTT GSM Gas Quality',
+    title: 'PTT GSM CSC Factory',
   },
 
   entities: {

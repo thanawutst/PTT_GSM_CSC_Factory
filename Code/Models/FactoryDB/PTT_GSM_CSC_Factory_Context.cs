@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace PTT_GSM_CSC_Factory.Models.FactoryDB
 {
-    public partial class PTT_GSM_CSC_Factory : DbContext
+    public partial class PTT_GSM_CSC_Factory_Context : DbContext
     {
-        public PTT_GSM_CSC_Factory()
+        public PTT_GSM_CSC_Factory_Context()
         {
         }
 
-        public PTT_GSM_CSC_Factory(DbContextOptions<PTT_GSM_CSC_Factory> options)
+        public PTT_GSM_CSC_Factory_Context(DbContextOptions<PTT_GSM_CSC_Factory_Context> options)
             : base(options)
         {
         }
@@ -20,8 +20,6 @@ namespace PTT_GSM_CSC_Factory.Models.FactoryDB
         public virtual DbSet<SAP_CUST_GENERAL_VIEW> SAP_CUST_GENERAL_VIEW { get; set; }
         public virtual DbSet<SAP_CUST_PARTNER_VIEW> SAP_CUST_PARTNER_VIEW { get; set; }
         public virtual DbSet<SAP_CUST_SALE_VIEW> SAP_CUST_SALE_VIEW { get; set; }
-        public virtual DbSet<TA_Data> TA_Data { get; set; }
-        public virtual DbSet<TA_DataType> TA_DataType { get; set; }
         public virtual DbSet<TH_District> TH_District { get; set; }
         public virtual DbSet<TH_Province> TH_Province { get; set; }
         public virtual DbSet<TH_Subdistrict> TH_Subdistrict { get; set; }
@@ -34,6 +32,7 @@ namespace PTT_GSM_CSC_Factory.Models.FactoryDB
         public virtual DbSet<TM_Factory> TM_Factory { get; set; }
         public virtual DbSet<TM_FactoryProduct> TM_FactoryProduct { get; set; }
         public virtual DbSet<TM_News> TM_News { get; set; }
+        public virtual DbSet<TM_Staff> TM_Staff { get; set; }
         public virtual DbSet<TM_User> TM_User { get; set; }
         public virtual DbSet<T_AD_Connection> T_AD_Connection { get; set; }
 
@@ -166,68 +165,6 @@ namespace PTT_GSM_CSC_Factory.Models.FactoryDB
                     .IsUnicode(false);
 
                 entity.Property(e => e.dUpdate).HasColumnType("datetime");
-            });
-
-            modelBuilder.Entity<TA_Data>(entity =>
-            {
-                entity.HasKey(e => e.nDataID);
-
-                entity.Property(e => e.nDataID).ValueGeneratedNever();
-
-                entity.Property(e => e.cActive)
-                    .HasMaxLength(1)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.cCanDelete)
-                    .HasMaxLength(1)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.cDel)
-                    .HasMaxLength(1)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.cRequired)
-                    .HasMaxLength(1)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.dAdd).HasColumnType("datetime");
-
-                entity.Property(e => e.dUpdate).HasColumnType("datetime");
-
-                entity.Property(e => e.sDataEN)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.sDataTH)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<TA_DataType>(entity =>
-            {
-                entity.HasKey(e => e.nTypeID);
-
-                entity.Property(e => e.nTypeID).ValueGeneratedNever();
-
-                entity.Property(e => e.cActive)
-                    .HasMaxLength(1)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.cDel)
-                    .HasMaxLength(1)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.cManage)
-                    .HasMaxLength(1)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.sTypeNameEN)
-                    .HasMaxLength(150)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.sTypeNameTH)
-                    .HasMaxLength(150)
-                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<TH_District>(entity =>
@@ -846,6 +783,41 @@ namespace PTT_GSM_CSC_Factory.Models.FactoryDB
 
                 entity.Property(e => e.sThumbnailPathTH)
                     .HasMaxLength(200)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<TM_Staff>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.Property(e => e.sAvatarName)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.sAvatarPath)
+                    .HasMaxLength(300)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.sAvatarSysFileName)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.sEmail)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.sFirstname)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.sPassword).IsUnicode(false);
+
+                entity.Property(e => e.sSurName)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.sUserName)
+                    .HasMaxLength(20)
                     .IsUnicode(false);
             });
 

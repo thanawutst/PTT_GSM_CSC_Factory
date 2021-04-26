@@ -14,7 +14,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "SoftthaiIntranet": {
+    "PTT_GSM_CSC_Factory": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

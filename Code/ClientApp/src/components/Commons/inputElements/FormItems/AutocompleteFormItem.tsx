@@ -109,7 +109,6 @@ function AutocompleteFormItem(props) {
   const handleSearch = async (value) => {
     try {
       const results = await fetchFn(value, AUTOCOMPLETE_SERVER_FETCH_SIZE);
-
       return results.map((result) => mapper.toAutocomplete(result));
     } catch (error) {
       console.error(error);
@@ -197,13 +196,11 @@ AutocompleteFormItem.defaultProps = {
 };
 
 AutocompleteFormItem.propTypes = {
-  // fetchFn: PropTypes.func.isRequired,
-  // mapper: PropTypes.object.isRequired,
-  fetchFn: PropTypes.func,
-  mapper: PropTypes.object,
+  fetchFn: PropTypes.func.isRequired,
+  mapper: PropTypes.object.isRequired,
   required: PropTypes.bool,
   mode: PropTypes.string,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   label: PropTypes.string,
   hint: PropTypes.string,
   autoFocus: PropTypes.bool,

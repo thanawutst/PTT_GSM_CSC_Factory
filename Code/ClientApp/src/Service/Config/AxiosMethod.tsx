@@ -9,6 +9,5 @@ export const AxiosGetJson = async (path, data = {}) => {
     const config = {} as any;
     if (data) config.params = data;
     const response = await AxiosConfig.get(path, config); 
-    console.log(response)
     return response.data;
 }

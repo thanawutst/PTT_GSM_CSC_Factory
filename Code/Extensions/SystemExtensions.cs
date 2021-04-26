@@ -10,7 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace SoftthaiIntranet.Extensions
+namespace PTT_GSM_CSC_Factory.Extensions
 {
     public static class SystemExtensions
     {
