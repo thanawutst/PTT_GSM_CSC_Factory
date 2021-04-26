@@ -180,7 +180,6 @@ const TestComponentsForm = (props) => {
   };
 
   useEffect(() => {
-    // GetProjectLst();
     setArrSelectForm(arrSelect);
     setArrMultiSelectForm(arrSelect);
     setarrData(arrDataList);
