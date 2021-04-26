@@ -13,7 +13,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             "OS-COMMENT4": "If you have changed target frameworks, make sure to update the program path.",
-            "program": "${workspaceFolder}/bin/Debug/net5.0/PTT_GSM_Gas_Quality.dll",
+            "program": "${workspaceFolder}/bin/Debug/net5.0/PTT_GSM_CSC_Factory.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,

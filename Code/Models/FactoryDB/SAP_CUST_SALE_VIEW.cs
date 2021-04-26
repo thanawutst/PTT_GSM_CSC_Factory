@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace PTT_GSM_Gas_Quality.Models.FactoryDB
+namespace PTT_GSM_CSC_Factory.Models.FactoryDB
 {
     public partial class SAP_CUST_SALE_VIEW
     {

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTT_GSM_Gas_Quality", "PTT_GSM_Gas_Quality.csproj", "{DED8F50B-FA7B-4FA6-9E45-80843BCFA3DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTT_GSM_CSC_Factory", "PTT_GSM_CSC_Factory.csproj", "{DED8F50B-FA7B-4FA6-9E45-80843BCFA3DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

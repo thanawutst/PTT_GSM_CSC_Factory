@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/PTT_GSM_Gas_Quality.csproj",
+                "${workspaceFolder}/PTT_GSM_CSC_Factory.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/PTT_GSM_Gas_Quality.csproj",
+                "${workspaceFolder}/PTT_GSM_CSC_Factory.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,7 +32,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/PTT_GSM_Gas_Quality.csproj",
+                "${workspaceFolder}/PTT_GSM_CSC_Factory.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
