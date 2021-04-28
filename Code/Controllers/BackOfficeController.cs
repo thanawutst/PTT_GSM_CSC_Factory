@@ -75,6 +75,34 @@ namespace PTT_GSM_CSC_Factory.Controllers
         }
 
         [HttpPost("[action]")]
+        public async Task<IActionResult> DeleteDistribution(ItemDelete model)
+        {
+            try
+            {
+                foreach (var item in model.arrItem)
+                {
+                    TM_Distributor hasPJ = _db.TM_Distributor.Where(w => w.nDistributorID == item).FirstOrDefault();
+
+
+                    hasPJ.dUpdate = DateTime.Now;
+                    hasPJ.cDel = "Y";
+                    await _db.SaveChangesAsync();
+
+                    var arrStaff = _db.TM_Staff.Where(w => w.nDistributorID == item).ToList();
+
+                    _db.RemoveRange(arrStaff);
+                    await _db.SaveChangesAsync();
+                }
+
+                return Ok(new { code = SystemMessageMethod.code_success });
+            }
+            catch (System.Exception)
+            {
+                return Ok(new { code = SystemMessageMethod.code_error });
+            }
+        }
+
+        [HttpPost("[action]")]
         public async Task<IActionResult> SaveDistributor(objSaveDistributor model)
         {
             try
@@ -178,6 +206,10 @@ namespace PTT_GSM_CSC_Factory.Controllers
         public class lstDistributor : TM_Distributor
         {
             public int nStaff { get; set; }
+        }
+        public class ItemDelete
+        {
+            public List<int> arrItem { get; set; }
         }
     }
 }

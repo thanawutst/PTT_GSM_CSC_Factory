@@ -20,8 +20,6 @@ const DistributorStaff = (props) => {
   const [openModal, setOpenModal] = useState(false as any);
   //   const [arrStaff, setArrStaff] = useState([] as any);
   const { arrStaff, setArrStaff } = props;
-  const [avatar, setAvatar] = useState([] as any);
-  console.log("arrStaff =>", arrStaff);
   const schema = yup.object().shape({});
 
   const [initialValues] = useState(() => {

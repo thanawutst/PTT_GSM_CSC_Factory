@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { AxiosGetJson } from "src/Service/Config/AxiosMethod";
 import { Button, Grid, IconButton } from "@material-ui/core";
 import BackdropLoading from "src/view/Shared/BackdropLoading";
 import MUIDataTable from "mui-datatables";
 import AddIcon from "@material-ui/icons/Add";
-import {
-  ButtonAddHead,
-  ButtonEditTB,
-  ButtonViewTB,
-} from "src/components/Commons/ButtonAll/ButtonAll";
+import { ButtonEditTB } from "src/components/Commons/ButtonAll/ButtonAll";
 import { makeStyles } from "@material-ui/core";
 import { useHistory } from "react-router";
 import Breadcrumb from "src/view/Shared/Breadcrumb";
 import { FormWrapper } from "src/components/Commons/style/ContentWrapper";
-import { MuiIconButtonItem } from "src/components/Systems/MaterialComponent";
+import {
+  MuiIconButtonItem,
+  DialogConfirm,
+  Sweetalert,
+  AlertIcon,
+  AlertTitle,
+} from "src/components/Systems/MaterialComponent";
 import ItemStaffModal from "./ItemStaffModal";
+import { DeleteForever } from "@material-ui/icons";
+import { AxiosGetJson, AxiosPostJson } from "src/Service/Config/AxiosMethod";
 
 const DistributorList = (props) => {
   const lable = makeStyles({
@@ -57,7 +60,6 @@ const DistributorList = (props) => {
   const classes = lable();
 
   const [ArrDist, setArrDist] = useState([] as any);
-  console.log("ArrDist =>", ArrDist);
   const [loading, setloading] = useState(false as any);
   const [selectedRows, SetSelectedRows] = useState([]);
   const [OpenStaffModal, SetOpenStaffModal] = useState(false);
@@ -74,6 +76,31 @@ const DistributorList = (props) => {
 
   const onCloseModal = () => {
     SetOpenStaffModal(!OpenStaffModal);
+  };
+
+  const onDelete = async () => {
+    let dataSend = {
+      arrItem: selectedRows.map((row) => ArrDist[row].nDistributorID),
+    };
+
+    DialogConfirm(
+      async () => {
+        let result: any = await AxiosPostJson(
+          "BackOffice/DeleteDistribution",
+          dataSend
+        );
+        if (result.data.code == 200) {
+          Sweetalert.Success(AlertTitle.Success, "", null);
+          GetDistList();
+          SetSelectedRows([]);
+        } else {
+          Sweetalert.Error(AlertIcon.error, "", null);
+        }
+      },
+      false,
+      "",
+      "Do you want to delete ?"
+    );
   };
 
   useEffect(() => {
@@ -158,7 +185,6 @@ const DistributorList = (props) => {
   ];
 
   const onClickStaffModal = (value) => {
-    console.log("value =>", value);
     SetOpenStaffModal(true);
     SetDistIDOpenModal(value);
   };
@@ -212,6 +238,20 @@ const DistributorList = (props) => {
               columns={columnsTable}
               options={options}
             />
+            {/* Delete Button */}
+            {ArrDist.length > 0 && (
+              <IconButton
+                style={{
+                  backgroundColor: selectedRows.length ? "red" : "gray",
+                  color: "#fff",
+                  transform: "translateY(-100%)",
+                }}
+                disabled={!selectedRows.length}
+                onClick={onDelete}
+              >
+                <DeleteForever />
+              </IconButton>
+            )}
           </Grid>
 
           {/*staff modal */}
