@@ -493,6 +493,10 @@ namespace PTT_GSM_CSC_Factory.Models.FactoryDB
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
+                entity.Property(e => e.sCode)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.sComapanyCode)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -501,7 +505,7 @@ namespace PTT_GSM_CSC_Factory.Models.FactoryDB
                     .HasMaxLength(1000)
                     .IsUnicode(false);
 
-                entity.Property(e => e.sDistributorCodeTem)
+                entity.Property(e => e.sDistributorCode)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -519,14 +523,6 @@ namespace PTT_GSM_CSC_Factory.Models.FactoryDB
 
                 entity.Property(e => e.sEmail)
                     .HasMaxLength(150)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.sImageName)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.sImagePath)
-                    .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.sLatitude)
@@ -551,6 +547,14 @@ namespace PTT_GSM_CSC_Factory.Models.FactoryDB
                     .HasMaxLength(150)
                     .IsUnicode(false);
 
+                entity.Property(e => e.sOrgChartName)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.sOrgChartPath)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.sShipTo)
                     .HasMaxLength(30)
                     .IsUnicode(false);
@@ -559,11 +563,11 @@ namespace PTT_GSM_CSC_Factory.Models.FactoryDB
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
-                entity.Property(e => e.sSysImageName)
+                entity.Property(e => e.sSysLogoName)
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.Property(e => e.sSysLogoName)
+                entity.Property(e => e.sSysOrgChartName)
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
@@ -788,7 +792,7 @@ namespace PTT_GSM_CSC_Factory.Models.FactoryDB
 
             modelBuilder.Entity<TM_Staff>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.nStaffID);
 
                 entity.Property(e => e.sAvatarName)
                     .HasMaxLength(150)
@@ -806,15 +810,11 @@ namespace PTT_GSM_CSC_Factory.Models.FactoryDB
                     .HasMaxLength(150)
                     .IsUnicode(false);
 
-                entity.Property(e => e.sFirstname)
+                entity.Property(e => e.sName)
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
                 entity.Property(e => e.sPassword).IsUnicode(false);
-
-                entity.Property(e => e.sSurName)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.sUserName)
                     .HasMaxLength(20)

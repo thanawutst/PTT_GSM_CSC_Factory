@@ -46,6 +46,8 @@ const AutoCompleteDistName = (props) => {
         mapper={mapper}
         name={props.name}
         label={props.label}
+        required={props.required}
+        {...props}
       />
     </React.Fragment>
   );

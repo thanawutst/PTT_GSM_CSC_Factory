@@ -9,7 +9,7 @@ const ContentWrapper = styled("div")({
   borderRadius: "5px",
 });
 export const FormWrapper = styled("div")({
-  paddingTop: 0,
+  paddingTop: 10,
   paddingBottom: 0,
 });
 

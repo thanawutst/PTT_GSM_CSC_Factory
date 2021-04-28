@@ -58,8 +58,6 @@ function RadioFormItem(props) {
         name={name}
         value={String(watch(name) || '')}
         onChange={(e) => {
-          console.log(" e.target.value", e.target.value)
-          console.log(" name", name)
           setValue(name, e.target.value, { shouldValidate: true });
           props.onChange && props.onChange(e.target.value);
         }}

@@ -132,11 +132,11 @@ const TestComponentsForm = (props) => {
     nInputNumber: yupFormSchemas.string("Input Form Item", {
       required: true,
     }),
-    sSelect: yupFormSchemas.integer("Select Form Item", {
+    sSelect: yupFormSchemas.string("Select Form Item", {
       required: true,
     }),
-    sMultiSelect: yupFormSchemas.string("Multi Select", {
-      required: false,
+    sMultiSelect: yupFormSchemas.stringArray("Multi Select", {
+      required: true,
     }),
     dDatePicker: yupFormSchemas.date("Date Picker", {
       required: true,

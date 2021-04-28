@@ -1,0 +1,213 @@
+﻿.page-internal {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+
+  /* 
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; */
+}
+.ant-table-cell {
+  vertical-align: middle !important;
+}
+
+.page-ridge {
+  position: relative;
+  display: block;
+  min-width: var(--height-header);
+  width: var(--height-header);
+
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  width: auto;
+  max-width: 100%;
+}
+
+.page-ridge > .box-date {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  color: #ffffff;
+  background: #021c1a; /* Old browsers */
+  background: -moz-linear-gradient(
+    45deg,
+    #000000 0%,
+    #189cdb 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    45deg,
+    #000000 0%,
+    #189cdb 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    45deg,
+    #000000 0%,
+    #189cdb 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#021c1a', endColorstr='#189cdb ',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.page-ridge > .box-date > .date-label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: block;
+  text-align: center;
+}
+
+.page-ridge > .box-date > .date-label > .date-label-DD {
+  font-size: 4em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.page-ridge > .box-date > .date-label > .date-label-MMMYYYY {
+  font-size: 1.25em;
+  font-weight: 600;
+}
+
+.page-content {
+  position: relative;
+  -ms-flex-preferred-size: 0;
+  flex-basis: 0;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  min-width: 0;
+  max-width: 100%;
+  display: block;
+  border-left: var(--border-dark001);
+}
+
+.content-head {
+  width: 100%;
+}
+
+.content-head td {
+  vertical-align: middle;
+  border: var(--border-dark001);
+  border-collapse: collapse;
+}
+
+.content-head .head-icon {
+  width: 60px;
+  text-align: center;
+  display: table-cell;
+  color: #00afec;
+  font-size: 1.5em;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+.border-bot {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.content-head .head-icon > img {
+  width: 30px;
+}
+
+.content-head .head-title {
+  padding: 14px;
+  font-size: 1.5em;
+  line-height: 1;
+  display: table-cell;
+}
+
+.content-head .head-title .title-label-1 {
+  color: #1e73b4;
+}
+
+.content-head .head-title .title-label-2 {
+  color: #282752;
+}
+
+.content-head .breadcrumb {
+  margin: 0;
+  padding: 10px 15px;
+  font-size: 0.9em;
+  color: #858585;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+.content-head .breadcrumb a {
+  color: inherit;
+}
+
+.content-head .breadcrumb .active {
+  color: #333333;
+}
+
+@media (max-width: 991px) {
+  #BODY:after {
+    content: none;
+  }
+
+  .page-internal {
+    display: block;
+  }
+
+  .content-head .head-icon {
+    display: none;
+  }
+
+  .content-head .head-title {
+    padding-right: 65px;
+  }
+
+  .page-ridge {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: auto;
+    width: 50px;
+  }
+
+  .page-ridge > .box-date {
+    height: 79px;
+  }
+
+  .page-ridge > .box-date > .date-label {
+    line-height: 1;
+  }
+
+  .page-ridge > .box-date > .date-label > .date-label-DD {
+    font-size: 2em;
+    letter-spacing: normal;
+  }
+
+  .page-ridge > .box-date > .date-label > .date-label-MMMYYYY {
+    visibility: hidden;
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 487px) {
+  .content-head .head-title {
+    padding: 10px;
+    padding-right: 50px;
+    font-size: 1.2em;
+  }
+
+  .page-ridge {
+    width: 40px;
+  }
+
+  .page-ridge > .box-date {
+    height: 59px;
+  }
+
+  .page-ridge > .box-date > .date-label > .date-label-DD {
+    font-size: 1.5em;
+  }
+
+  .page-ridge > .box-date > .date-label > .date-label-MMMYYYY {
+    font-size: 0.8em;
+  }
+
+  .content-head .breadcrumb {
+    padding: 5px 10px;
+    font-size: 0.8em;
+  }
+}

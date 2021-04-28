@@ -23,8 +23,8 @@ import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { blue } from "@material-ui/core/colors";
 import { makeStyles, Button, IconButton } from "@material-ui/core";
+import { apiurl, url } from "src/Service/Config/ApiUrl";
 
-const emails = ["username@gmail.com", "user02@gmail.com"];
 const useStyles = makeStyles({
   avatar: {
     backgroundColor: blue[100],
@@ -75,6 +75,7 @@ function SimpleDialog(props: SimpleDialogProps) {
 }
 
 const sController = "MP_Back";
+
 const lstMenu = [
   {
     cPRMS: "N",
@@ -82,10 +83,10 @@ const lstMenu = [
     nLavel: 0,
     nMenuID: 1,
     nOrderBy: 1,
-    sHeaderName: "Home",
+    sHeaderName: "Distributor head",
     sIcon: "fas fa-home",
-    sLink: "/b_home",
-    sMenuName: "Home",
+    sLink: "/b_distributor/list",
+    sMenuName: "Distributor",
   },
   {
     cPRMS: "N",
@@ -102,45 +103,12 @@ const lstMenu = [
     cPRMS: "N",
     nHeaderID: null,
     nLavel: 0,
-    nMenuID: 3,
-    nOrderBy: 3,
-    sHeaderName: "Menu3",
-    sIcon: "fas fa-comment-dots",
-    sLink: "/b_menu3",
-    sMenuName: "Menu3",
-  },
-  {
-    cPRMS: "N",
-    nHeaderID: null,
-    nLavel: 0,
     nMenuID: 4,
     nOrderBy: 4,
-    sHeaderName: "Menu4",
+    sHeaderName: "Home",
     sIcon: "fas fa-comment-dots",
     sLink: "/",
-    sMenuName: "Menu4",
-  },
-  {
-    cPRMS: "N",
-    nHeaderID: null,
-    nLavel: 0,
-    nMenuID: 5,
-    nOrderBy: 5,
-    sHeaderName: "Menu5",
-    sIcon: "fas fa-comment-dots",
-    sLink: "/",
-    sMenuName: "Menu5",
-  },
-  {
-    cPRMS: "N",
-    nHeaderID: null,
-    nLavel: 0,
-    nMenuID: 6,
-    nOrderBy: 6,
-    sHeaderName: "Menu6",
-    sIcon: "fas fa-comment-dots",
-    sLink: "/",
-    sMenuName: "Menu6",
+    sMenuName: "Home",
   },
 ];
 
@@ -158,7 +126,6 @@ const Layout_MP_Back = (Props: any) => {
     lstMenuAll: [] as any,
   });
   const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState(emails[1]);
   const [openMenu, setOpenMenu] = React.useState(true);
   const handleClickOpen = () => {
     setOpen(true);
@@ -166,7 +133,6 @@ const Layout_MP_Back = (Props: any) => {
 
   const handleClose = (value: string) => {
     setOpen(false);
-    setSelectedValue(value);
   };
 
   const LoadMenu = () => {
@@ -241,10 +207,7 @@ const Layout_MP_Back = (Props: any) => {
 
   const setActiveLink = (sLink: any) => {
     let sActive = "";
-    let sPath = window.location.pathname.replace(
-      process.env.REACT_APP_API_URL + "",
-      "/"
-    );
+    let sPath = window.location.pathname.replace(apiurl + "", "/");
     // sActive = sLink === sPath ? "active" : ""
 
     if (sLink !== sPath) {
@@ -267,15 +230,12 @@ const Layout_MP_Back = (Props: any) => {
   };
   const setActiveManuName = () => {
     let sActive = "";
-    let sPath = window.location.pathname.replace(
-      process.env.REACT_APP_API_URL + "",
-      "/"
-    );
+    let sPath = window.location.pathname.replace(apiurl + "", "/");
     let q = new linq<any>(objMenu.lstMenuAll).FirstOrDefault(
       (f) => f.sLink === sPath
     );
     if (q != null) {
-      sActive = q.sHeaderName;
+      sActive = q.sMenuName;
     }
     return sActive;
   };
@@ -292,12 +252,6 @@ const Layout_MP_Back = (Props: any) => {
       <Link to="/" id="lnkToLogin" />
       <Link to="/" id="lnkTo" />
       <Link to="/Admin-Home" id="NotPermission" />
-      <SimpleDialog
-        selectedValue={selectedValue}
-        open={open}
-        onClose={handleClose}
-        data={objMenu.lstGroupUser}
-      />
       <div id="PAGE_CONTENT" onClick={toggleArea}>
         <div className="content-header">
           <div className="header-item">
@@ -381,12 +335,12 @@ const Layout_MP_Back = (Props: any) => {
                         to={items.sLink}
                         className={setActiveLink(items.sLink)}
                       >
-                        <Tooltip title={items.sHeaderName} placement="right">
+                        <Tooltip title={items.sMenuName} placement="right">
                           <div className="menu-icon">
                             <i className={items.sIcon}></i>
                           </div>
                         </Tooltip>
-                        <div className="menu-label">{items.sHeaderName}</div>
+                        <div className="menu-label">{items.sMenuName}</div>
                       </Link>
                     </li>
                   );
@@ -395,7 +349,7 @@ const Layout_MP_Back = (Props: any) => {
             </div>
           </div>
           <div className="body-main">
-            <div className="main-head">
+            {/* <div className="main-head">
               <div className="head-flag">
                 <div className="flag-item">
                   <div id="headIcon" className="head-icon"></div>
@@ -407,19 +361,21 @@ const Layout_MP_Back = (Props: any) => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="main-body">{Props.children}</div>
           </div>
         </div>
 
-        {/* <div className="content-footer">
-                    <div className="footer-panel">
-                        <div className="footer-content">
-                            <div className="footer-title">PTT PUBLIC COMPANY LIMITED</div>
-                            <div className="footer-desc">Copyright © 2020 PTT Public Company Limited All rights reserved</div>
-                        </div>
-                    </div>
-                </div> */}
+        <div className="content-footer">
+          <div className="footer-panel">
+            <div className="footer-content">
+              <div className="footer-title">PTT PUBLIC COMPANY LIMITED</div>
+              <div className="footer-desc">
+                Copyright © 2020 PTT Public Company Limited All rights reserved
+              </div>
+            </div>
+          </div>
+        </div>
         {/* <Overlay /> */}
       </div>
 
@@ -429,12 +385,12 @@ const Layout_MP_Back = (Props: any) => {
             return (
               <li key={`menu_NV_${index}_${items.nMenuID}`}>
                 <Link to={items.sLink} className={setActiveLink(items.sLink)}>
-                  <Tooltip title={items.sHeaderName} placement="right">
+                  <Tooltip title={items.sMenuName} placement="right">
                     <div className="menu-icon">
                       <i className={items.sIcon}></i>
                     </div>
                   </Tooltip>
-                  <div className="menu-label">{items.sHeaderName}</div>
+                  <div className="menu-label">{items.sMenuName}</div>
                 </Link>
               </li>
             );

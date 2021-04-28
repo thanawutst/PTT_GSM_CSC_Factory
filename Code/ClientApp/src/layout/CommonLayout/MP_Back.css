@@ -207,7 +207,7 @@ body {
 .content-body>.body-side>.main-nav>.menu-toggle {
     display: block;
     cursor: pointer;
-    padding-bottom: 5px;
+    padding-bottom: 0px;
     border-bottom: 1px solid #E9E9E9;
     margin-right: 10px;
 }

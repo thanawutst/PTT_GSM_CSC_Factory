@@ -53,6 +53,7 @@ class Fileuploader extends React.Component {
 	}
 	SetUploadFile() {
 		let onComplete = this.props.onComplete;
+		let modalMode = this.props.modalMode;
 		let onRemoveComplete = this.props.onRemoveComplete;
 		let multiFile = this.props.multiFile;
 		this.$el = $(this.el);
@@ -198,7 +199,6 @@ class Fileuploader extends React.Component {
 		this.API_Obj = this.api;
 	}
 	componentDidMount() {
-		console.log('didMount =>')
 		this.SetUploadFile()
 	};
 

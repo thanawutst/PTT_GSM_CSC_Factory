@@ -18,17 +18,10 @@ const useStyles = makeStyles(materialUiStyles as any);
 
 function AutocompleteFormItem(props) {
   const {
-    errors,
-    watch,
-    setValue,
-    register,
-    formState: { touched, isSubmitted },
-  } = useFormContext();
-
-  const {
     label,
     name,
     hint,
+    options,
     placeholder,
     autoFocus,
     externalErrorMessage,
@@ -39,11 +32,27 @@ function AutocompleteFormItem(props) {
     mapper,
   } = props;
 
+  const {
+    errors,
+    watch,
+    setValue,
+    register,
+    formState: { touched, isSubmitted },
+  } = useFormContext();
+
+  const errorMessage = FormErrors.errorMessage(
+    name,
+    errors,
+    touched,
+    isSubmitted,
+    externalErrorMessage
+  );
+
+  const originalValue = watch(name);
+
   useEffect(() => {
     register({ name });
   }, [register, name]);
-
-  const originalValue = watch(name);
 
   const value = () => {
     const { mode } = props;
@@ -102,27 +111,28 @@ function AutocompleteFormItem(props) {
     }
 
     const newValue = mapper.toValue(value);
+
+    if (props.onSetValues) {
+      props.onSetValues(value, newValue); // SET VALUE ตรงนี้!
+    }
+
     setValue(name, newValue, { shouldValidate: true });
     props.onChange && props.onChange(newValue);
+
+    mapper.toValue(value);
   };
 
   const handleSearch = async (value) => {
     try {
       const results = await fetchFn(value, AUTOCOMPLETE_SERVER_FETCH_SIZE);
-      return results.map((result) => mapper.toAutocomplete(result));
+      if (results) {
+        return results.map((result) => mapper.toAutocomplete(result));
+      }
     } catch (error) {
       console.error(error);
       return [];
     }
   };
-
-  const errorMessage = FormErrors.errorMessage(
-    name,
-    errors,
-    touched,
-    isSubmitted,
-    externalErrorMessage
-  );
 
   const classes = useStyles();
 
@@ -144,15 +154,17 @@ function AutocompleteFormItem(props) {
       <AsyncSelect
         styles={controlStyles}
         classes={classes}
+        value={value()}
+        onChange={handleSelect}
         inputId={name}
         TextFieldProps={{
           label,
           required,
           variant: "outlined",
           fullWidth: true,
+          size: "small",
           error: Boolean(errorMessage),
           helperText: errorMessage || hint,
-          size: "small",
           InputLabelProps: {
             shrink: true,
           },
@@ -161,11 +173,10 @@ function AutocompleteFormItem(props) {
         defaultOptions={true}
         isMulti={mode === "multiple" ? true : false}
         loadOptions={handleSearch}
+        // options={options}
         placeholder={placeholder || ""}
         autoFocus={autoFocus || undefined}
-        onChange={handleSelect}
         onBlur={() => props.onBlur && props.onBlur(null)}
-        value={value()}
         isClearable={isClearable}
         loadingMessage={() => i18n("autocomplete.loading")}
         noOptionsMessage={() => i18n("autocomplete.noOptions")}
@@ -201,6 +212,7 @@ AutocompleteFormItem.propTypes = {
   required: PropTypes.bool,
   mode: PropTypes.string,
   name: PropTypes.string,
+  options: PropTypes.array,
   label: PropTypes.string,
   hint: PropTypes.string,
   autoFocus: PropTypes.bool,

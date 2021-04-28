@@ -35,7 +35,6 @@ namespace PTT_GSM_CSC_Factory.Controllers
         [HttpGet("[action]/{label?}")]
         public ActionResult GetDistributionName(string label)
         {
-            PTT_GSM_CSC_Factory_Context _db = new PTT_GSM_CSC_Factory_Context();
             var lstData = _db.SAP_CUST_GENERAL_VIEW.Where(w => w.CUST_NAME.Contains(label)).OrderBy(o => o.CUST_NAME).Select(s => new
             {
                 value = s.CUST_NUMBER,

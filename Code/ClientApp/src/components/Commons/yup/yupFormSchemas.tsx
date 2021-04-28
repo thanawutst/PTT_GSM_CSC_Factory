@@ -97,6 +97,36 @@ const yupFormSchemas = {
 
     return yupChain;
   },
+  object(label, config?) {
+    config = config || {};
+
+    let yupChain = yup
+      .array()
+      .compact()
+      .ensure()
+      .of(
+        yup.object().transform((cv, ov) => {
+          return ov === "" ? null : cv;
+        })
+      )
+      .label(label);
+
+    if (config.required || config.min) {
+      yupChain = yupChain.required();
+    }
+
+    if (config.min || config.min === 0) {
+      yupChain = yupChain.min(config.min);
+    } else if (config.required) {
+      yupChain = yupChain.min(1);
+    }
+
+    if (config.max) {
+      yupChain = yupChain.max(config.max);
+    }
+
+    return yupChain;
+  },
   relationToMany(label, config?) {
     config = config || {};
 
@@ -277,7 +307,7 @@ const yupFormSchemas = {
       .label(label)
       .transform((value, originalValue) =>
         value ? moment(value).format("YYYY-MM-DDTHH:mm:ss") : null
-      )
+      );
 
     if (config.required) {
       yupChain = yupChain.required();
@@ -300,7 +330,7 @@ const yupFormSchemas = {
       })
       .transform((value, originalValue) =>
         value ? moment(value).format("YYYY-MM-DDTHH:mm:ss") : null
-      )
+      );
     if (config.required) {
       yupChain = yupChain.required();
     }
@@ -309,13 +339,15 @@ const yupFormSchemas = {
   },
   datetimeRange(label, config?) {
     config = config || {};
-    let yupChain = yup.array().of(yup
-      .mixed()
-      .nullable(true)
-      .label(label)
-      .transform((value, originalValue) =>
-        value ? moment(value).format("YYYY-MM-DDTHH:mm:ss") : null
-      ));
+    let yupChain = yup.array().of(
+      yup
+        .mixed()
+        .nullable(true)
+        .label(label)
+        .transform((value, originalValue) =>
+          value ? moment(value).format("YYYY-MM-DDTHH:mm:ss") : null
+        )
+    );
 
     if (config.required) {
       yupChain = yupChain.required();
@@ -346,7 +378,6 @@ const yupFormSchemas = {
 
     return yupChain;
   },
-
 };
 
 export default yupFormSchemas;

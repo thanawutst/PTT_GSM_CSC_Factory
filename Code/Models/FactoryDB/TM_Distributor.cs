@@ -12,7 +12,9 @@ namespace PTT_GSM_CSC_Factory.Models.FactoryDB
         public string sComapanyCode { get; set; }
         public int? nTitleID { get; set; }
         public string sTitleName { get; set; }
+        public string sDistributorCode { get; set; }
         public string sDistributorName { get; set; }
+        public string sCode { get; set; }
         public int? nHeadDistributor { get; set; }
         public string nCustomerGroupID { get; set; }
         public string sEmail { get; set; }
@@ -31,9 +33,9 @@ namespace PTT_GSM_CSC_Factory.Models.FactoryDB
         public string sSysLogoName { get; set; }
         public string sLogoName { get; set; }
         public string sLogoPath { get; set; }
-        public string sSysImageName { get; set; }
-        public string sImageName { get; set; }
-        public string sImagePath { get; set; }
+        public string sSysOrgChartName { get; set; }
+        public string sOrgChartName { get; set; }
+        public string sOrgChartPath { get; set; }
         public string sDetail { get; set; }
         public int? nOrder { get; set; }
         public string cStatus { get; set; }
@@ -42,6 +44,5 @@ namespace PTT_GSM_CSC_Factory.Models.FactoryDB
         public DateTime? dAdd { get; set; }
         public int? nAddBy { get; set; }
         public string cDel { get; set; }
-        public string sDistributorCodeTem { get; set; }
     }
 }
